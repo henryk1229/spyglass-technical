@@ -29,22 +29,23 @@ const ResidentsList: React.FC<ResidentsListProps> = ({ residentsUrls }) => {
     }
   }, [residentsUrls]);
 
-  // if a planet has no residents
-  if (residentsUrls.length < 1) {
-    return <div>No known residents</div>;
-  }
-
-  return residentNames ? (
-    <div>
-      Residents:
-      <ul>
-        {residentNames.map((name) => {
-          return <li key={name}>{name}</li>;
-        })}
-      </ul>
+  return (
+    <div style={{ margin: "8px" }}>
+      <div style={{ fontWeight: "bold" }}>Residents</div>
+      {residentsUrls.length > 0 ? (
+        residentNames ? (
+          <ul>
+            {residentNames.map((name) => {
+              return <li key={name}>{name}</li>;
+            })}
+          </ul>
+        ) : (
+          <div style={{ margin: "16px" }}>Retrieving data...</div>
+        )
+      ) : (
+        <div>No known residents</div>
+      )}
     </div>
-  ) : (
-    <div>Retrieving data...</div>
   );
 };
 

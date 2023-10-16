@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "wouter";
 import ResidentsList from "./ResidentsList";
+import { capitalCase } from "change-case";
 
 type PlanetData = Record<string, string | string[]> | null;
 
@@ -31,30 +32,35 @@ const PlanetDetails: React.FC = () => {
     );
   }
 
-  const { name, residents, films, ...rest } = planetData;
+  const { name, residents, ...rest } = planetData;
 
   // satisfy typescript
   const residentsUrls = Array.isArray(residents) ? residents : [];
+
+  const dataNotToDisplay = ["films", "created", "edited", "url"];
 
   return (
     <div
       style={{
         display: "flex",
         flexDirection: "column",
-        justifyContent: "space-evenly",
       }}
     >
-      <div style={{ fontWeight: "bold" }}>{name}</div>
+      <div style={{ fontWeight: "bold", margin: "16px" }}>{name}</div>
       <div style={{ display: "flex", flexDirection: "row" }}>
-        <div>
-          Basic facts:
-          {Object.keys(rest).map((detail) => {
-            return (
-              <div key={detail}>
-                {detail}: {planetData[detail]}
-              </div>
-            );
-          })}
+        <div style={{ margin: "8px" }}>
+          <div style={{ fontWeight: "bold" }}>Basic Facts</div>
+          <ul>
+            {Object.keys(rest)
+              .filter((key) => !dataNotToDisplay.includes(key))
+              .map((detail) => {
+                return (
+                  <li key={detail}>
+                    {capitalCase(detail)}: {planetData[detail]}
+                  </li>
+                );
+              })}
+          </ul>
         </div>
         <ResidentsList residentsUrls={residentsUrls} />
       </div>
