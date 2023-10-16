@@ -1,13 +1,6 @@
 import { useEffect, useState } from "react";
 import { useLocation, useParams } from "wouter";
 
-interface Props {
-  count: number;
-  previous: string;
-  next: string;
-  planets: Record<string, string | string[]>[];
-}
-
 // TODO - clean up
 type PageData = {
   count: number;
@@ -39,7 +32,7 @@ const getCurrentRange = ({ previous }: { previous: string }): string => {
 const PlanetsList: React.FC = () => {
   // handle router logic
   const { pageNumber } = useParams();
-  const [_loc, setLocation] = useLocation();
+  const [, setLocation] = useLocation();
 
   // hold SWAPI pageData in state
   const [pageData, setPageData] = useState<PageData>(null);
@@ -71,6 +64,7 @@ const PlanetsList: React.FC = () => {
     );
   }
 
+  // display list of planets and page data
   const { count, previous, next, results: planets } = pageData;
   const countRange = getCurrentRange({
     previous,
