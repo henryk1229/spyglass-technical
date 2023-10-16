@@ -2689,6 +2689,7 @@ __metadata:
     react-dom: ^18.2.0
     typescript: ^5.0.2
     vite: ^4.4.5
+    wouter: ^2.12.0
   languageName: unknown
   linkType: soft
 
@@ -2898,6 +2899,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"use-sync-external-store@npm:^1.0.0":
+  version: 1.2.0
+  resolution: "use-sync-external-store@npm:1.2.0"
+  peerDependencies:
+    react: ^16.8.0 || ^17.0.0 || ^18.0.0
+  checksum: 5c639e0f8da3521d605f59ce5be9e094ca772bd44a4ce7322b055a6f58eeed8dda3c94cabd90c7a41fb6fa852210092008afe48f7038792fd47501f33299116a
+  languageName: node
+  linkType: hard
+
 "util-deprecate@npm:^1.0.1":
   version: 1.0.2
   resolution: "util-deprecate@npm:1.0.2"
@@ -2962,6 +2972,17 @@ __metadata:
   dependencies:
     string-width: ^1.0.2 || 2 || 3 || 4
   checksum: d5fc37cd561f9daee3c80e03b92ed3e84d80dde3365a8767263d03dacfc8fa06b065ffe1df00d8c2a09f731482fcacae745abfbb478d4af36d0a891fad4834d3
+  languageName: node
+  linkType: hard
+
+"wouter@npm:^2.12.0":
+  version: 2.12.0
+  resolution: "wouter@npm:2.12.0"
+  dependencies:
+    use-sync-external-store: ^1.0.0
+  peerDependencies:
+    react: ">=16.8.0"
+  checksum: 882e89e62c1a0f516c650cad1e4ed3da9d4a9076f10df0f69cb68feebec7d8d543ecd34b02db282cc29df7f96a9cc59fc9b1870585ab6049780565d600baf13f
   languageName: node
   linkType: hard
 
