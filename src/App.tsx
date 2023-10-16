@@ -8,6 +8,7 @@ function App() {
     <div>
       <Route path='/planet/:planetId' component={PlanetDetails} />
       <Route path='/planets/:pageNumber' component={PlanetsList} />
+      <Route path='/planets' component={PlanetsList} />
       <Route path='/' component={PlanetsList} />
     </div>
   );
