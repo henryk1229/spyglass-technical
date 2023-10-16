@@ -20,15 +20,18 @@ const fetchAllResidentsData = async (residentsUrls: string[]) => {
 const ResidentsList: React.FC<ResidentsListProps> = ({ residentsUrls }) => {
   const [residentNames, setResidentsNames] = useState<string[] | null>(null);
 
+  // if a planet has residents, fetch data for each
   useEffect(() => {
     if (residentsUrls.length > 0) {
       fetchAllResidentsData(residentsUrls).then((res) => {
+        // we only want to display the residents name as a planetary detail
         const residentNames = res.map((resident) => resident.name);
         setResidentsNames(residentNames);
       });
     }
   }, [residentsUrls]);
 
+  // if a planet has no residents, show 'no known...', otherwise show 'retrieving...' while fetching, then list the names
   return (
     <div style={{ margin: "8px" }}>
       <div style={{ fontWeight: "bold" }}>Residents</div>
@@ -43,7 +46,7 @@ const ResidentsList: React.FC<ResidentsListProps> = ({ residentsUrls }) => {
           <div style={{ margin: "16px" }}>Retrieving data...</div>
         )
       ) : (
-        <div>No known residents</div>
+        <div style={{ margin: "16px" }}>No known residents</div>
       )}
     </div>
   );

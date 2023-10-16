@@ -32,11 +32,13 @@ const PlanetDetails: React.FC = () => {
     );
   }
 
+  // separate name and residents keys for special handling
   const { name, residents, ...rest } = planetData;
 
   // satisfy typescript
   const residentsUrls = Array.isArray(residents) ? residents : [];
 
+  // for now, we won't show this data to the user
   const dataNotToDisplay = ["films", "created", "edited", "url"];
 
   return (
