@@ -37,16 +37,20 @@ const ResidentsList: React.FC<ResidentsListProps> = ({ residentsUrls }) => {
       <div style={{ fontWeight: "bold" }}>Residents</div>
       {residentsUrls.length > 0 ? (
         residentNames ? (
-          <ul>
+          <>
             {residentNames.map((name) => {
-              return <li key={name}>{name}</li>;
+              return (
+                <div key={name} style={{ margin: "8px" }}>
+                  {name}
+                </div>
+              );
             })}
-          </ul>
+          </>
         ) : (
-          <div style={{ margin: "16px" }}>Retrieving data...</div>
+          <div style={{ margin: "8px" }}>Retrieving data...</div>
         )
       ) : (
-        <div style={{ margin: "16px" }}>No known residents</div>
+        <div style={{ margin: "8px" }}>No known residents</div>
       )}
     </div>
   );
