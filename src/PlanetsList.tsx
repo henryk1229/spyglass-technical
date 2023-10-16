@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { useLocation, useParams } from "wouter";
 
-// TODO - clean up
 type PageData = {
   count: number;
   previous: string;
@@ -55,6 +54,18 @@ const PlanetsList: React.FC = () => {
     setLocation(`/planets/${nextPageNumber}`);
   };
 
+  const handleClickPlanetName = (ev: React.BaseSyntheticEvent) => {
+    const planetName = ev.target.innerHTML;
+    const planetUrl = pageData?.results.find(
+      (planet) => planet.name === planetName
+    )?.url;
+    const splitUrl = planetUrl?.toString().split("/");
+    // id will be second to last item in array, e.g '['/', '22', '/']
+    const planetId = splitUrl?.[splitUrl.length - 2];
+    console.log("id", planetId);
+    setLocation(`/planet/${planetId}`);
+  };
+
   // handle loading state
   if (!pageData) {
     return (
@@ -81,7 +92,11 @@ const PlanetsList: React.FC = () => {
       <div>
         {planets.map((planet) => {
           return (
-            <div key={planet.name.toString()} style={{ cursor: "pointer" }}>
+            <div
+              key={planet.name.toString()}
+              style={{ cursor: "pointer" }}
+              onClick={handleClickPlanetName}
+            >
               {planet.name}
             </div>
           );
