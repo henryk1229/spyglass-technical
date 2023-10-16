@@ -19,8 +19,9 @@ function App() {
   // hold paginated planets data in state
   const [pageData, setPageData] = useState<PageData>(null);
 
+  // run on mount to fetch initial list of planets
   useEffect(() => {
-    // fetch planets and set state
+    // fetch planet data and set state
     fetchSWAPIData().then((res: PageData) => {
       setPageData(res);
     });
