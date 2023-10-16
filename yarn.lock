@@ -1068,6 +1068,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"change-case@npm:^5.0.2":
+  version: 5.0.2
+  resolution: "change-case@npm:5.0.2"
+  checksum: 6c5e0cc2d526be82fa354de51f5293e7e9f00f67b79a61950c980b8b8ae57f7fbb110a8a4eb3178e6a6f6a487f774696bdb1d43b9543d6938080428f28953c78
+  languageName: node
+  linkType: hard
+
 "chownr@npm:^2.0.0":
   version: 2.0.0
   resolution: "chownr@npm:2.0.0"
@@ -2682,6 +2689,7 @@ __metadata:
     "@typescript-eslint/eslint-plugin": ^6.0.0
     "@typescript-eslint/parser": ^6.0.0
     "@vitejs/plugin-react": ^4.0.3
+    change-case: ^5.0.2
     eslint: ^8.45.0
     eslint-plugin-react-hooks: ^4.6.0
     eslint-plugin-react-refresh: ^0.4.3
