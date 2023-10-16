@@ -9,12 +9,16 @@ type PageData = {
 } | null;
 
 const fetchSWAPIData = async (pageNumber: number) => {
-  if (pageNumber) {
-    return await fetch(
-      `https://swapi.dev/api/planets/?page=${pageNumber}`
-    ).then((res) => res.json());
-  }
-  return await fetch("https://swapi.dev/api/planets").then((res) => res.json());
+  const url = pageNumber
+    ? `https://swapi.dev/api/planets/?page=${pageNumber}`
+    : "https://swapi.dev/api/planets";
+  return await fetch(url).then((res) => {
+    // throw error for redirect, below
+    if (res.status === 404) {
+      throw new Error("Page not found");
+    }
+    return res.json();
+  });
 };
 
 const getCurrentRange = ({ previous }: { previous: string }): string => {
@@ -39,10 +43,13 @@ const PlanetsList: React.FC = () => {
   // run on mount to fetch initial list of planets
   useEffect(() => {
     // fetch planet data and set state
-    fetchSWAPIData(pageNumber).then((res: PageData) => {
-      setPageData(res);
-    });
-  }, [pageNumber]);
+    fetchSWAPIData(pageNumber)
+      .then((res: PageData) => {
+        setPageData(res);
+      })
+      // redirect to ErrorPage
+      .catch(() => setLocation("/404"));
+  }, [pageNumber, setLocation]);
 
   const handleClickPrevious = () => {
     const prevPageNumber = previous.split("=")[1];
@@ -62,7 +69,6 @@ const PlanetsList: React.FC = () => {
     const splitUrl = planetUrl?.toString().split("/");
     // id will be second to last item in array, e.g '['/', '22', '/']
     const planetId = splitUrl?.[splitUrl.length - 2];
-    console.log("id", planetId);
     setLocation(`/planet/${planetId}`);
   };
 

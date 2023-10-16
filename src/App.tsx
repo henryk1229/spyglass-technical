@@ -1,16 +1,18 @@
 import "./App.css";
-import { Route } from "wouter";
+import { Route, Switch } from "wouter";
 import PlanetsList from "./PlanetsList";
 import PlanetDetails from "./PlanetDetails";
+import ErrorPage from "./ErrorPage";
 
 function App() {
   return (
-    <div>
+    <Switch>
       <Route path='/planet/:planetId' component={PlanetDetails} />
       <Route path='/planets/:pageNumber' component={PlanetsList} />
       <Route path='/planets' component={PlanetsList} />
       <Route path='/' component={PlanetsList} />
-    </div>
+      <Route component={ErrorPage} />
+    </Switch>
   );
 }
 
