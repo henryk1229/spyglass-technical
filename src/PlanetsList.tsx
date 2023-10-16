@@ -88,13 +88,15 @@ const PlanetsList: React.FC = () => {
         justifyContent: "space-evenly",
       }}
     >
-      <div>Click on a planet to learn more details</div>
+      <div style={{ fontWeight: "bold", margin: "16px" }}>
+        Click on a planet to learn more details
+      </div>
       <div>
         {planets.map((planet) => {
           return (
             <div
               key={planet.name.toString()}
-              style={{ cursor: "pointer" }}
+              style={{ cursor: "pointer", margin: "8px" }}
               onClick={handleClickPlanetName}
             >
               {planet.name}
@@ -103,11 +105,20 @@ const PlanetsList: React.FC = () => {
         })}
       </div>
       <div>
-        <button disabled={!previous} onClick={handleClickPrevious}>
+        <button
+          disabled={!previous}
+          onClick={handleClickPrevious}
+          style={{ margin: "8px" }}
+        >
           {"<<"}
         </button>
-        Showing {countRange} of {count} planets
-        <button disabled={!next} onClick={handleClickNext}>
+        Showing <span style={{ fontWeight: "bold" }}>{countRange}</span> of{" "}
+        <span style={{ fontWeight: "bold" }}>{count}</span> planets
+        <button
+          disabled={!next}
+          onClick={handleClickNext}
+          style={{ margin: "8px" }}
+        >
           {">>"}
         </button>
       </div>

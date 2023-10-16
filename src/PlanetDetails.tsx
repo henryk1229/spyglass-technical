@@ -54,17 +54,15 @@ const PlanetDetails: React.FC = () => {
       <div style={{ display: "flex", flexDirection: "row" }}>
         <div style={{ margin: "8px" }}>
           <div style={{ fontWeight: "bold" }}>Basic Facts</div>
-          <ul>
-            {Object.keys(rest)
-              .filter((key) => !dataNotToDisplay.includes(key))
-              .map((detail) => {
-                return (
-                  <li key={detail}>
-                    {capitalCase(detail)}: {planetData[detail]}
-                  </li>
-                );
-              })}
-          </ul>
+          {Object.keys(rest)
+            .filter((key) => !dataNotToDisplay.includes(key))
+            .map((detail) => {
+              return (
+                <div key={detail} style={{ margin: "8px" }}>
+                  {capitalCase(detail)}: {planetData[detail]}
+                </div>
+              );
+            })}
         </div>
         <ResidentsList residentsUrls={residentsUrls} />
       </div>
