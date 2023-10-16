@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "wouter";
+import ResidentsList from "./ResidentsList";
 
 type PlanetData = Record<string, string | string[]> | null;
 
@@ -10,14 +11,12 @@ const fetchPlanetData = async (planetId: number) => {
 };
 
 const PlanetDetails: React.FC = () => {
-  // handle router logic
+  // determin planetId via url params
   const { planetId } = useParams();
-  // const [, setLocation] = useLocation();
 
   // hold planetData in state after fetching
   const [planetData, setPlanetData] = useState<PlanetData>(null);
 
-  // // run on mount to fetch initial list of planets
   useEffect(() => {
     // fetch planet data and set state
     fetchPlanetData(planetId).then((res: PlanetData) => {
@@ -32,7 +31,10 @@ const PlanetDetails: React.FC = () => {
     );
   }
 
-  const { name, ...rest } = planetData;
+  const { name, residents, films, ...rest } = planetData;
+
+  // satisfy typescript
+  const residentsUrls = Array.isArray(residents) ? residents : [];
 
   return (
     <div
@@ -43,14 +45,18 @@ const PlanetDetails: React.FC = () => {
       }}
     >
       <div style={{ fontWeight: "bold" }}>{name}</div>
-      <div>
-        {Object.keys(rest).map((detail) => {
-          return (
-            <div key={detail}>
-              {detail}: {planetData[detail]}
-            </div>
-          );
-        })}
+      <div style={{ display: "flex", flexDirection: "row" }}>
+        <div>
+          Basic facts:
+          {Object.keys(rest).map((detail) => {
+            return (
+              <div key={detail}>
+                {detail}: {planetData[detail]}
+              </div>
+            );
+          })}
+        </div>
+        <ResidentsList residentsUrls={residentsUrls} />
       </div>
     </div>
   );
