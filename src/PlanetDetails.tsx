@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "wouter";
+import { useLocation, useParams } from "wouter";
 import ResidentsList from "./ResidentsList";
 import { capitalCase } from "change-case";
 
@@ -14,6 +14,8 @@ const fetchPlanetData = async (planetId: number) => {
 const PlanetDetails: React.FC = () => {
   // determin planetId via url params
   const { planetId } = useParams();
+
+  const [, setLocation] = useLocation();
 
   // hold planetData in state after fetching
   const [planetData, setPlanetData] = useState<PlanetData>(null);
@@ -66,6 +68,9 @@ const PlanetDetails: React.FC = () => {
         </div>
         <ResidentsList residentsUrls={residentsUrls} />
       </div>
+      <button onClick={() => setLocation("/planets/")}>
+        This is not the planet I'm searching for...
+      </button>
     </div>
   );
 };
