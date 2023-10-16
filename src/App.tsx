@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import "./App.css";
+import { Route } from "wouter";
 import PlanetsList from "./PlanetsList";
 
 // TODO - clean up + consolidate typing
@@ -29,18 +30,8 @@ function App() {
 
   return (
     <div>
-      {pageData?.count ? (
-        <PlanetsList
-          count={pageData.count}
-          previous={pageData.previous}
-          next={pageData.next}
-          planets={pageData.results}
-        />
-      ) : (
-        <div style={{ fontWeight: "bold" }}>
-          A long time ago, in a galaxy far, far away...
-        </div>
-      )}
+      <Route path='/planets/:pageNumber' component={PlanetsList} />
+      <Route path='/' component={PlanetsList} />
     </div>
   );
 }
